@@ -1,18 +1,34 @@
-function isEnoughCapacity(products, containerSize) {
-  let totalProducts = 0;
-  for (const product in products) {
-    totalProducts += products[product];
-    if (totalProducts > containerSize) {
-      return false;
-    }
-  }
-  return true;
-}
+// Перед звільненням розробник зламав вихідний код управління акаунтами користувачів нашого сервісу доставки їжі. Виконай рефакторинг методів об'єкта customer, розставивши відсутні this під час звернення до властивостей об'єкта.
 
-console.log(isEnoughCapacity({ apples: 2, grapes: 3, carrots: 1 }, 8)); // true
+// Використай цей стартовий код і виконай рефакторинг. Після оголошення об'єкта ми додали виклики методів. У консоль будуть виведені результати їх роботи. Будь ласка, нічого там не змінюй.
 
-console.log(isEnoughCapacity({ apples: 4, grapes: 6, lime: 16 }, 12)); // false
+const customer = {
+  username: 'Mango',
+  balance: 24000,
+  discount: 0.1,
+  orders: ['Burger', 'Pizza', 'Salad'],
+  // Change code below this line
+  getBalance() {
+    return balance;
+  },
+  getDiscount() {
+    return discount;
+  },
+  setDiscount(value) {
+    discount = value;
+  },
+  getOrders() {
+    return orders;
+  },
+  addOrder(cost, order) {
+    balance -= cost - cost * discount;
+    orders.push(order);
+  },
+  // Change code above this line
+};
 
-console.log(isEnoughCapacity({ apples: 1, lime: 5, tomatoes: 3 }, 14)); // true
-
-console.log(isEnoughCapacity({ apples: 18, potatoes: 5, oranges: 2 }, 7)); // false
+customer.setDiscount(0.15);
+console.log(customer.getDiscount()); // 0.15
+customer.addOrder(5000, 'Steak');
+console.log(customer.getBalance()); // 19750
+console.log(customer.getOrders()); // ["Burger", "Pizza", "Salad", "Steak"]
